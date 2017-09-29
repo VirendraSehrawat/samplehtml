@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        $(document).ready(function () {
+            console.log("Document is ready");
+
+            // $.ajax({
+            //     url: 'http://www.colorado.edu/conflict/peace/download/peace.zip',
+            //     dataType: 'JSON',
+            //     success: function (response) {
+            //         if (response.zip) {
+            //             location.href = response.zip;
+            //         }
+            //     }
+            // });
+            var url = '/zipfiles/test.zip';
+            var filename = 'test.zip';
+            var request = new XMLHttpRequest();
+            request.open('GET', url, true);
+            request.responseType = 'blob';
+            request.onload = function () {
+                var link = document.createElement('a');
+                document.body.appendChild(link);
+                link.href = window.URL.createObjectURL(request.response);
+                link.download = filename;
+                link.click();
+            };
+            request.send();
+        });
+    </script>
+</body>
+
+</html>
